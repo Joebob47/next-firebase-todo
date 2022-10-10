@@ -47,23 +47,32 @@ const Auth = () => {
         //if color mode is dark, do sun, else do moon
         //if is logged in is true, output this... (it's a JSX shortcut)
         //the signout method is a method of the auth function
-        <Box position={"fixed"} top="5%" right="5%">
-        <Button onClick={() => toggleColorMode()}>
-        {colorMode == "dark" ? <FaSun /> : <FaMoon />}
-        </Button>{" "}
-        {isLoggedIn && (
-        <>
-        <Text color="green.500">{user.email}</Text>
-        <Link color="red.500" onClick={() => auth.signOut()}>
-        Logout
-        </Link>
-        </>
-        )}
-        {!isLoggedIn && (
-        <Button leftIcon={<FaGoogle />} onClick={() => handleAuth()}>
-        Login with Google
-        </Button>
-        )}
+        //the FORWARD SLASH takes you to the root, top of project directory
+        <Box display="flex" align-items="center" justifyContent="space-between">
+            <Box>
+                <Link href="/add-todo">Add To Do</Link>
+            </Box>
+            <Box>
+                <Link href="/">List All To Dos</Link>
+            </Box>
+        <Box textAlign="right">
+            <Button onClick={() => toggleColorMode()}>
+            {colorMode == "dark" ? <FaSun /> : <FaMoon />}
+            </Button>{" "}
+            {isLoggedIn && (
+            <>
+            <Text color="green.500">{user.email}</Text>
+            <Link color="red.500" onClick={() => auth.signOut()}>
+            Logout
+            </Link>
+            </>
+            )}
+            {!isLoggedIn && (
+            <Button leftIcon={<FaGoogle />} onClick={() => handleAuth()}>
+            Login with Google
+            </Button>
+            )}
+        </Box>
         </Box>
     );
 };

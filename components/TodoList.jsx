@@ -5,8 +5,9 @@ import {
     SimpleGrid,
     Text,
     useToast,
+    Link
     } from "@chakra-ui/react";
-    import React, { useEffect } from "react";
+    import React, { useEffect} from "react";
     import useAuth from "../hooks/useAuth";
     //onSnapshot is when firestore sends back data
     //query is a search method, where is setting up criteria for that query
@@ -22,6 +23,10 @@ import {
         // a nested function that does the work of updating the list from
         //firestore data
         const refreshData = () => {
+
+        };
+
+        useEffect(() => {
             if (!user) {
                 setTodos([]);
                 return;
@@ -53,9 +58,6 @@ import {
                 //When setTodos gets called, update the entire component
                 setTodos(ar);
             });
-        };
-
-        useEffect(() => {
             refreshData();
         }, 
         [user]
@@ -134,6 +136,10 @@ import {
                             </Badge>
                         </Heading>
                         <Text>{todo.description}</Text>
+                        <Badge bg="blue" color="white">
+                            <Link href={`/todo/${todo.id}`}> Add Note </Link>
+                        </Badge>
+                    
                     </Box>
                 ))}
                 </SimpleGrid>
