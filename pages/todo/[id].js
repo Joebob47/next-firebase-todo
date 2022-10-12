@@ -14,7 +14,6 @@ import{
     getDoc
 } from 'firebase/firestore';
 import {db} from '../../firebase';
-import {AddNote} from '../../components/AddNote';
 
 // define the JSX component to show just one single todo
 // we are going to pass data to this component from our getServerSideProps
@@ -35,7 +34,15 @@ const noteItem = ({itemData}) =>{
         <Center>
             <Box boxShadow="dark-lg" p="6" rounded="md" bg="white"
             fontSize = {20} mt = {5} >
-               <AddNote />
+                    <Text>
+                        {itemData.title}
+                    </Text>
+                    <Text>  
+                        {itemData.description}
+                    </Text>
+                    <Text>
+                        {itemData.status}
+                    </Text>
                 <Badge bg="blue" color="white">
                     <Link href="/"> Back to List Page </Link>
                 </Badge>
@@ -58,7 +65,7 @@ export async function getServerSideProps(context){
 //name out of there
     let itemData = null; //this is in case it doesn't find a record
     //get a doc from firestore
-    const docRef = doc(db, 'notes', context.params.id);
+    const docRef = doc(db, 'todo', context.params.id);
     const docSnap = await getDoc(docRef);
     if(docSnap.exists()){
         itemData = docSnap.data();

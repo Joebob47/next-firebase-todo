@@ -14,7 +14,7 @@ import {
 //useAuth function, because this page requires authentication
 import useAuth from "../hooks/useAuth";
 //bring in addTodo from our api
-import { addNote } from "../api/todo";
+import { makeNote } from "../api/todo";
 
 //now let's define a React JSX component
 const AddNote = () => {
@@ -56,14 +56,14 @@ const AddNote = () => {
         //now we call the addToDo method that has the state values for title,
         //description, status, userID within it.
         //calling our api function that sholuld add a new doc to our firestore collection
-        await addNote(note);
+        await makeNote(note);
         //once we get past prev line, firestore database is made
         setIsLoading(false);
         setTitle("");
         setDescription("");
         setStatus("pending");
         //show a floaty with status update
-        toast({ title: "Todo created successfully", status: "success" });
+        toast({ title: "Note created successfully", status: "success" });
     };
     
     //return the markup for this addToDo JSX component (returning the UI)

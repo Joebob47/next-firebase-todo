@@ -53,7 +53,13 @@ const Auth = () => {
                 <Link href="/add-todo">Add To Do</Link>
             </Box>
             <Box>
+                <Link href='/addNote'> Add Note</Link>
+            </Box>
+            <Box>
                 <Link href="/">List All To Dos</Link>
+            </Box>
+            <Box>
+                <Link href="/note-list">List All Notes</Link>
             </Box>
         <Box textAlign="right">
             <Button onClick={() => toggleColorMode()}>
