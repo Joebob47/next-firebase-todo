@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
     Flex,
-    
     InputGroup,
     InputLeftElement,
     Input,
@@ -13,14 +12,22 @@ import { Auth } from '/components/Auth.jsx';
 import firebase from 'firebase/app';
 import {doc , getDoc} from "firebase/firestore";
 import { db } from "../../firebase";
+import useAuth from '/hooks/useAuth';
 
 
-const toDoItem = ({itemData}) => {
+const toDoItem = ({itemData}) =>{
+    //enforce user login
+    //we should get a user object back from useAuth
     console.log("HELLO ITEMDATA");
-  const [inputTitle, setTitle] = useState(itemData.title);
-  const [inputDesc, setDesc] = useState(itemData.description);
-  const [statusMsg, setStatusMsg] = useState('');
-  console.log("HELLO ITEMDATA2")
+    const [inputTitle, setTitle] = useState(itemData.title);
+    const [inputDesc, setDesc] = useState(itemData.description);
+    const [statusMsg, setStatusMsg] = useState('');
+    console.log("HELLO ITEMDATA2")
+    
+    const {user} = useAuth() || {};
+    if (!user){
+        return;
+    }
   
   const sendData = async () => {
     try {
