@@ -18,11 +18,11 @@ import useAuth from '/hooks/useAuth';
 const toDoItem = ({itemData}) =>{
     //enforce user login
     //we should get a user object back from useAuth
-    console.log("HELLO ITEMDATA");
+    console.log("HELLO ITEMDATA" + JSON.stringify({itemData}));
     const [inputTitle, setTitle] = useState(itemData.title);
     const [inputDesc, setDesc] = useState(itemData.description);
     const [statusMsg, setStatusMsg] = useState('');
-    console.log("HELLO ITEMDATA2")
+    console.log("HELLO ITEMDATA2");
     
     const {user} = useAuth() || {};
     if (!user){
@@ -97,6 +97,7 @@ export async function getServerSideProps(context){
         const docSnap = await getDoc(docRef);
         if(docSnap.exists()){
             itemData = docSnap.data();
+            console.log("docSnap exists!");
         }
     
         return{
