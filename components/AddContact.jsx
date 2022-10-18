@@ -14,15 +14,15 @@ import {
 //useAuth function, because this page requires authentication
 import useAuth from "../hooks/useAuth";
 //bring in addTodo from our api
-import { makeNote } from "../api/todo";
+import { makeContact } from "../api/todo";
 
 //now let's define a React JSX component
-const AddNote = () => {
+const AddContact = () => {
    //every form control (text input) we want to associate a react state, so it can be updated
     //because we imported the WHOLE REACT OBJECT, we must use React. now
     //React is setting these states with the function (i.e. sets title state with setTitle)
-    const [title, setTitle] = React.useState("");
-    const [description, setDescription] = React.useState("");
+    const [name, setName] = React.useState("");
+    const [number, setNumber] = React.useState("");
     const [status, setStatus] = React.useState("pending");
     const [isLoading, setIsLoading] = React.useState(false);
     //useToast pops up a floating message (like, you're not logged in)
@@ -30,7 +30,7 @@ const AddNote = () => {
     const { isLoggedIn, user } = useAuth() || {};
     //where does USER come from again? it's the property set by setUser in useAuth()
     //let's define a function that runs to handle the toDo operation
-    const handleNoteCreate = async () => {
+    const handleContactCreate = async () => {
         //are we NOT logged in?
         if (!isLoggedIn) {
             //show a floating alert if we're not logged in
@@ -46,24 +46,23 @@ const AddNote = () => {
         //if this code gets run, user is logged in
 
         setIsLoading(true);
-        const note = {
-        title,
-        description,
-        status,
+        const contact = {
+        name,
+        number,
         //we have a field in our templated field set
         userId: user.uid,
         };
         //now we call the addToDo method that has the state values for title,
         //description, status, userID within it.
         //calling our api function that sholuld add a new doc to our firestore collection
-        await makeNote(note);
+        await makeContact(contact);
         //once we get past prev line, firestore database is made
         setIsLoading(false);
-        setTitle("");
-        setDescription("");
+        setName("");
+        setNumber("");
         setStatus("pending");
         //show a floaty with status update
-        toast({ title: "Note created successfully", status: "success" });
+        toast({ title: "Contact created successfully", status: "success" });
     };
     
     //return the markup for this addToDo JSX component (returning the UI)
@@ -71,29 +70,30 @@ const AddNote = () => {
         <Box w="40%" margin={"0 auto"} display="block" mt={5}>
             <Stack direction="column">
                 <Input
-                    placeholder="Title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="Contact Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     />
                 <Textarea
-                    placeholder="Your Note"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Phone Number"
+                    value={number}
+                    onChange={(e) => setNumber(e.target.value)}
                 />
+                
                 <Button
                 
-                    onClick={() => handleNoteCreate()}
+                    onClick={() => handleContactCreate()}
                    
-                    disabled={title.length < 1 || description.length < 1 || isLoading}
+                    disabled={name.length < 1 || number.length < 1 || isLoading}
                    
                     colorScheme="teal"
                     variant="solid"
                 >
-                Add Note
+                Add Contact
                 </Button>
             </Stack>
         </Box>
     );
 };
 
-export default AddNote;
+export default AddContact;

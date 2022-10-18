@@ -1,13 +1,12 @@
-//going to isolate 
 import { Container } from "@chakra-ui/react";
-import AddNote from "../components/addNote.jsx";
+import AddContact from "../components/addContact.jsx";
 import Auth from "../components/Auth";
 
-export default function AddANote() {
+export default function AddAContact() {
   return (
     <Container maxW="7xl">
     <Auth />
-    <AddNote />
+    <AddContact />
     </Container>
   );
 }

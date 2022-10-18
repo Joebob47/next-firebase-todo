@@ -1,12 +1,12 @@
 import { Container } from "@chakra-ui/react";
 import Auth from "../components/Auth";
-import NoteList from "../components/NoteList";
+import EventList from "../components/EventList";
 
-export default function ListNote() {
+export default function ListEvent() {
     return (
       <Container maxW="7xl">
       <Auth />
-      <NoteList />
+      <EventList />
       </Container>
     );
   }
