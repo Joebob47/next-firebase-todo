@@ -73,8 +73,50 @@ const Auth = () => {
             </Button>
             )}
         </Box>
-
-        <Divider orientation='horizontal' />
+        <Center>
+        <Breadcrumb separator=" " p ="3">
+            <BreadcrumbItem mr = "4">
+                <BreadcrumbLink  
+                    p="2"       
+                    _hover={{
+                        textDecoration:"none",
+                        backgroundColor:"rgba(216, 223, 34, .3)",
+                    }} 
+                    href="/">Home
+                </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem mr = "4"> 
+                <BreadcrumbLink 
+                    p="2"
+                    _hover={{
+                        textDecoration:"none",
+                        backgroundColor:"rgba(216, 223, 34, .3)",
+                    }} 
+                    href="/todo-list">To Dos
+                </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem mr = "4">
+                <BreadcrumbLink
+                    p="2"
+                    _hover={{
+                        textDecoration:"none",
+                        backgroundColor:"rgba(216, 223, 34, .3)",
+                    }} 
+                href="/event-list">Events
+            </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem mr = "4">
+                <BreadcrumbLink
+                    p="2"
+                    _hover={{
+                        textDecoration:"none",
+                        backgroundColor:"rgba(216, 223, 34, .3)",
+                    }}                 
+                href="/contact-list">Contacts</BreadcrumbLink>
+            </BreadcrumbItem>
+        </Breadcrumb>
+        </Center>
+        <Divider borderColor="red" variant="dashed"/>
     </>
     );
 };

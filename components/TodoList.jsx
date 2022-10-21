@@ -7,7 +7,8 @@ import {
     useToast,
     Link,
     Button,
-    Center
+    Center,
+    Divider
     } from "@chakra-ui/react";
     import React, { useEffect} from "react";
     import useAuth from "../hooks/useAuth";
@@ -79,6 +80,7 @@ import {
                 docId: id, 
                 status: newStatus 
             });
+            //HERE WE MUST ACTUALLY CHANGE THE VISUAL QUEUE FOR PENDING TO COMPLETE
             toast({
                 //reverse apostrophes let us have variables in the format. it will spit out what's in newStatus after title
                 title: `Todo marked ${newStatus}`,
@@ -132,6 +134,7 @@ import {
                                 >
                                 <FaTrash />
                             </Badge>
+
                             <Badge
                                 color={todo.status == "pending" ? "gray.500" : "green.500"}
                                 bg="inherit"
@@ -146,6 +149,7 @@ import {
                                 >
                                 {todo.status == "pending" ? <FaToggleOff /> : <FaToggleOn />}
                             </Badge>
+                            
                             <Badge
                                 float="right"
                                 opacity="0.8"
@@ -154,8 +158,9 @@ import {
                                 {todo.status}
                             </Badge>
                         </Heading>
+                        <Divider borderColor="black" />
                         <Text>{todo.description}</Text>
-                        <Badge bg="blue" color="white">
+                        <Badge bg="#2314ed" color="white">
                             <Link href={`/todo/${todo.id}`}> View Me Solo! </Link> 
                         </Badge>
                     

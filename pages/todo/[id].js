@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import {
     Flex,
     InputGroup,
-    InputLeftElement,
+    InputLeftAddon,
     Input,
     Button,
     Text,
     AddIcon,
 } from "@chakra-ui/react";
-import { Auth } from '/components/Auth.jsx';
+import  Auth  from '../../components/Auth.jsx';
 import firebase from 'firebase/app';
-import {doc , getDoc} from "firebase/firestore";
+import {doc, getDoc, setDoc} from "firebase/firestore";
 import { db } from "../../firebase";
 import useAuth from '/hooks/useAuth';
 
 
-const toDoItem = ({itemData}) =>{
+const ToDoItem = ({itemData}) =>{
     //enforce user login
     //we should get a user object back from useAuth
     console.log("HELLO ITEMDATA" + JSON.stringify({itemData}));
@@ -29,43 +29,44 @@ const toDoItem = ({itemData}) =>{
         return;
     }
   
-  const sendData = async () => {
-    try {
-        console.log("KJKJDLFJDALJFLADJFLA");
-      console.log("sending!");
-      // try to update doc
-      const docref = await firebase.firestore().collection("todo").doc(itemData.id);
-      const doc = docref.get();
-
-      if (!doc.empty) {
-        docref.update(
-          {
-            title: inputTitle,
-            description: inputDesc
-          }
-        );
-        setStatusMsg("Updated!");
-      }
-
-    } catch (error) {
-      console.log(error);
+    const editToDo = async (itemData) => {
+        
+        const docRef = doc(db, 'todo', itemData.id);
+        const docSnap = await getDoc(docRef);
+        if(docSnap.exists()){
+            setDoc(docSnap, itemData, {merge:true})
+            .then(docSnap =>{
+                console.log("DOC UPDATED");
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }
+        
+        const doc = docRef.get();
+        if(itemData){
+        set(docRef, itemData, {merge:true})
+        .then(docRef =>{
+            console.log("DOC UPDATED");
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
-  }
+    };
+
 
   return (
     <>
     <Auth/>
+    { console.log("IN THE RETURN") };
     <Flex flexDir="column" maxW={800} align="center" justify="start" minH="100vh" m="auto" px={4} py={3}>
         <InputGroup>
-          <InputLeftElement
-            pointerEvents="none"
-            children={<AddIcon color="gray.300" />}
-          />
           <Input type="text" value={inputTitle} onChange={(e) => setTitle(e.target.value)} placeholder="title" />
           <Input type="text" value={inputDesc} onChange={(e) => setDesc(e.target.value)} placeholder="description" />
           <Button
             ml={2}
-            onClick={() => sendData()}
+            onClick={() => editToDo(itemData)}
             >
             Update
           </Button>
@@ -99,14 +100,14 @@ export async function getServerSideProps(context){
             itemData = docSnap.data();
             console.log("docSnap exists!");
         }
-    
+        
         return{
             props: {
                 itemData
             }
         };
-    }
-export default toDoItem;
+    };
+export default ToDoItem;
 
 
 /*
