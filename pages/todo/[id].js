@@ -24,15 +24,18 @@ const ToDoItem = ({itemData}) =>{
     const [statusMsg, setStatusMsg] = useState('');
     console.log("HELLO ITEMDATA2");
     
+    var docSnap;
+    var docRef;
+
     const {user} = useAuth() || {};
     if (!user){
         return;
     }
   
     const editToDo = async (itemData) => {
-        
-        const docRef = doc(db, 'todo', itemData.id);
-        const docSnap = await getDoc(docRef);
+        console.log("HELLO EDIT TO DO");
+        docRef = doc(db, 'todo', itemData.id);
+        docSnap = await getDoc(docRef);
         if(docSnap.exists()){
             setDoc(docSnap, itemData, {merge:true})
             .then(docSnap =>{
@@ -43,23 +46,13 @@ const ToDoItem = ({itemData}) =>{
             })
         }
         
-        const doc = docRef.get();
-        if(itemData){
-        set(docRef, itemData, {merge:true})
-        .then(docRef =>{
-            console.log("DOC UPDATED");
-        })
-        .catch(error => {
-            console.log(error);
-        })
-    }
     };
 
 
   return (
     <>
     <Auth/>
-    { console.log("IN THE RETURN") };
+    { console.log("IN THE RETURN") }
     <Flex flexDir="column" maxW={800} align="center" justify="start" minH="100vh" m="auto" px={4} py={3}>
         <InputGroup>
           <Input type="text" value={inputTitle} onChange={(e) => setTitle(e.target.value)} placeholder="title" />
@@ -67,6 +60,8 @@ const ToDoItem = ({itemData}) =>{
           <Button
             ml={2}
             onClick={() => editToDo(itemData)}
+            pr={5}
+            pl={5}
             >
             Update
           </Button>

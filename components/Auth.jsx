@@ -55,7 +55,7 @@ const Auth = () => {
         <>
             {/*bgColor="#d8df22" */}
         <Box>
-            <Button onClick={() => toggleColorMode()}>
+            <Button m={4} onClick={() => toggleColorMode()}>
             {colorMode == "dark" ? <FaSun /> : <FaMoon />}
             </Button>{" "}
             {isLoggedIn && (
