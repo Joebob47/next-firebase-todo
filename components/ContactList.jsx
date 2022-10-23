@@ -124,7 +124,9 @@ import {
                         </Heading>
                         <Text>{contact.name}</Text>
                         <Text>{contact.number}</Text>
-                    
+                        <Badge bg="#2314ed" color="white">
+                            <Link href={`/contact/${contact.id}`}> Edit </Link> 
+                        </Badge>
                     </Box>
                 ))}
                 </SimpleGrid>

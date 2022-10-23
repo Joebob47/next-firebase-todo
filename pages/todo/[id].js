@@ -24,8 +24,6 @@ const ToDoItem = ({itemData}) =>{
     const [statusMsg, setStatusMsg] = useState('');
     console.log("HELLO ITEMDATA2");
     
-    var docSnap;
-    var docRef;
 
     const {user} = useAuth() || {};
     if (!user){
@@ -34,8 +32,8 @@ const ToDoItem = ({itemData}) =>{
   
     const editToDo = async (itemData) => {
         console.log("HELLO EDIT TO DO");
-        docRef = doc(db, 'todo', itemData.id);
-        docSnap = await getDoc(docRef);
+        const docRef = doc(db, 'todo', itemData.id);
+        const docSnap = await getDoc(docRef);
         if(docSnap.exists()){
             setDoc(docSnap, itemData, {merge:true})
             .then(docSnap =>{

@@ -125,7 +125,9 @@ import {
                         </Heading>
                         <Text>{event.description}</Text>
                         <Text>{event.date}</Text>
-                    
+                        <Badge bg="#2314ed" color="white">
+                            <Link href={`/event/${event.id}`}> Edit </Link> 
+                        </Badge>
                     </Box>
                 ))}
                 </SimpleGrid>

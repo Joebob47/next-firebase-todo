@@ -161,7 +161,7 @@ import {
                         <Divider borderColor="black" />
                         <Text>{todo.description}</Text>
                         <Badge bg="#2314ed" color="white">
-                            <Link href={`/todo/${todo.id}`}> View Me Solo! </Link> 
+                            <Link href={`/todo/${todo.id}`}> Edit </Link> 
                         </Badge>
                     
                     </Box>
