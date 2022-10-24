@@ -7,6 +7,7 @@ import {
     Button,
     Text,
     AddIcon,
+    useToast
 } from "@chakra-ui/react";
 import  Auth  from '../../components/Auth.jsx';
 import firebase from 'firebase/app';
@@ -21,7 +22,8 @@ const ToDoItem = ({itemData}) =>{
     console.log("HELLO ITEMDATA" + JSON.stringify({itemData}));
     const [inputTitle, setTitle] = useState(itemData.title);
     const [inputDesc, setDesc] = useState(itemData.description);
-    const [statusMsg, setStatusMsg] = useState('');
+    const [statusMsg, setStatusMsg] = useState(itemData.status);
+    const toast=useToast();
     console.log("HELLO ITEMDATA2");
     
 
@@ -32,12 +34,24 @@ const ToDoItem = ({itemData}) =>{
   
     const editToDo = async (itemData) => {
         console.log("HELLO EDIT TO DO");
-        const docRef = doc(db, 'todo', itemData.id);
+        const docRef =  await doc(db, 'todo', itemData.id);
+        console.log(docRef);
         const docSnap = await getDoc(docRef);
+        console.log(docSnap);
         if(docSnap.exists()){
-            setDoc(docSnap, itemData, {merge:true})
+            console.log(inputDesc)
+            const newData = {
+                title: inputTitle,
+                description: inputDesc,
+                status: statusMsg
+            }
+            setDoc(docRef, newData, {merge:true})
             .then(docSnap =>{
-                console.log("DOC UPDATED");
+                toast({
+                    //reverse apostrophes let us have variables in the format. it will spit out what's in newStatus after title
+                    title: 'Note successfully updated!',
+                    status:'success'
+                });
             })
             .catch(error => {
                 console.log(error);
@@ -50,7 +64,6 @@ const ToDoItem = ({itemData}) =>{
   return (
     <>
     <Auth/>
-    { console.log("IN THE RETURN") }
     <Flex flexDir="column" maxW={800} align="center" justify="start" minH="100vh" m="auto" px={4} py={3}>
         <InputGroup>
           <Input type="text" value={inputTitle} onChange={(e) => setTitle(e.target.value)} placeholder="title" />
@@ -64,9 +77,6 @@ const ToDoItem = ({itemData}) =>{
             Update
           </Button>
         </InputGroup>
-        <Text>
-          {statusMsg}
-        </Text>
       </Flex>
     </>
   );
@@ -91,6 +101,7 @@ export async function getServerSideProps(context){
         const docSnap = await getDoc(docRef);
         if(docSnap.exists()){
             itemData = docSnap.data();
+            itemData.id= context.params.id;
             console.log("docSnap exists!");
         }
         

@@ -75,7 +75,9 @@ import {
         };
 
         const handleToggle = async (id, status) => {
+            console.log(status)
             const newStatus = status == "completed" ? "pending" : "completed";
+            console.log(newStatus, id )
             await toggleTodoStatus({ 
                 docId: id, 
                 status: newStatus 

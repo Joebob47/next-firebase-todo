@@ -31,7 +31,7 @@ const addTodo = async ({ userId, title, description, status }) => {
 //docId for a firebasde document in our collection
 //status value to communicate and update the document
 //this function allows us to CHANGE THE STATUS
-const toggleTodoStatus = async ({ docId, mystatus }) => {
+const toggleTodoStatus = async ({ docId, status }) => {
     try {
         //doc function was imported, db = reference to global var with database inside
         //name of collection = "todo"
@@ -40,8 +40,9 @@ const toggleTodoStatus = async ({ docId, mystatus }) => {
         const todoRef = doc(db, "todo", docId);
         //run that doc
         // we are updating the field name status
+        console.log(status)
         await updateDoc(todoRef, {
-        status: mystatus,
+        status: status,
     });
     } catch (err) {
         console.log(err);
