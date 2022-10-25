@@ -105,8 +105,7 @@ const AddTodo = () => {
                     //or if the desc length is less than 1, or if it's in the middle of operations
                     disabled={title.length < 1 || description.length < 1 || isLoading}
                     //CHAKRA BUTTON TRAITS
-                    colorScheme="teal"
-                    variant="solid"
+                    bg="#2314ed" color="white"
                 >
                 Add
                 </Button>

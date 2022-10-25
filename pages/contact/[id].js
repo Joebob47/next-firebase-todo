@@ -71,6 +71,7 @@ const ContactItem = ({itemData}) =>{
             onClick={() => editContact(itemData)}
             pr={5}
             pl={5}
+            bg="#2314ed" color="white"
             >
             Update
           </Button>

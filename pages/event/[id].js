@@ -74,6 +74,7 @@ const EventItem = ({itemData}) =>{
             onClick={() => editEvent(itemData)}
             pr={5}
             pl={5}
+            bg="#2314ed" color="white"
             >
             Update
           </Button>

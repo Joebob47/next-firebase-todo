@@ -102,8 +102,7 @@ const AddContact = () => {
                    
                     disabled={name.length < 1 || number.length < 1 || isLoading}
                    
-                    colorScheme="teal"
-                    variant="solid"
+                    bg="#2314ed" color="white"
                 >
                 Add Contact
                 </Button>
