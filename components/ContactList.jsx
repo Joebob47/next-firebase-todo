@@ -7,7 +7,8 @@ import {
     useToast,
     Link,
     Button,
-    Center
+    Center,
+    Divider
     } from "@chakra-ui/react";
     import React, { useEffect} from "react";
     import useAuth from "../hooks/useAuth";
@@ -18,7 +19,8 @@ import {
     import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
     import { deleteContact} from "../api/todo";
     import {FcCellPhone} from 'react-icons/fc';
-    
+    import {PhoneIcon, AddIcon} from '@chakra-ui/icons';
+    import { BsFillPersonFill, BsFillTelephoneFill } from "react-icons/bs";
     const ContactList = () => {
         const [contacts, setContacts] = React.useState([]);
         const {  user } = useAuth() || {};
@@ -105,8 +107,6 @@ import {
                         _hover={{ boxShadow: "sm" }}
                         key = {contact.id}
                         >
-                        <Heading as="h3" fontSize={"xl"}>
-                            {contact.title}{" "}
                             <Badge
                                 color="red.500"
                                 bg="inherit"
@@ -121,9 +121,12 @@ import {
                                 >
                                 <FaTrash />
                             </Badge>
+                        <Heading as="h3" fontSize={"xl"}><BsFillPersonFill style={{display:"inline"}}/> &nbsp; {contact.name}
+                        {contact.name}{" "}
                         </Heading>
-                        <Text>{contact.name}</Text>
-                        <Text>{contact.number}</Text>
+                        <Divider borderColor="black" />
+                        <Text><BsFillTelephoneFill style={{display:"inline"}}/> &nbsp; {contact.number}</Text>
+                        <br/>
                         <Badge bg="#2314ed" color="white">
                             <Link href={`/contact/${contact.id}`}> Edit </Link> 
                         </Badge>

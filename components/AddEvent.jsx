@@ -78,13 +78,13 @@ const AddEvent = () => {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     />
-                <Textarea
+                <Textarea 
                     placeholder="Event Description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
                 {/* CONSIDER NPM DATE PICKER HERE*/}
-                <Textarea 
+                <Input type = "date"
                 placeholder="Date of your Event"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}

@@ -22,6 +22,7 @@ const EventItem = ({itemData}) =>{
     console.log("HELLO ITEMDATA" + JSON.stringify({itemData}));
     const [inputTitle, setTitle] = useState(itemData.title);
     const [inputDesc, setDesc] = useState(itemData.description);
+    const [inputDate, setDate] = useState(itemData.date);
     const toast=useToast();
     console.log("HELLO ITEMDATA2");
     
@@ -41,7 +42,8 @@ const EventItem = ({itemData}) =>{
             console.log(inputDesc)
             const newData = {
                 title: inputTitle,
-                description: inputDesc
+                description: inputDesc,
+                date: inputDate
             }
             setDoc(docRef, newData, {merge:true})
             .then(docSnap =>{
@@ -66,6 +68,7 @@ const EventItem = ({itemData}) =>{
         <InputGroup>
           <Input type="text" value={inputTitle} onChange={(e) => setTitle(e.target.value)} placeholder="title" />
           <Input type="text" value={inputDesc} onChange={(e) => setDesc(e.target.value)} placeholder="description" />
+          <Input type="date" value={inputDate} onChange={(e) => setDate(e.target.value)} placeholder="description" />
           <Button
             ml={2}
             onClick={() => editEvent(itemData)}

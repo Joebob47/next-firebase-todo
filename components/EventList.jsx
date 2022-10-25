@@ -7,7 +7,8 @@ import {
     useToast,
     Link,
     Button,
-    Center
+    Center,
+    Divider
     } from "@chakra-ui/react";
     import React, { useEffect} from "react";
     import useAuth from "../hooks/useAuth";
@@ -123,6 +124,7 @@ import {
                                 <FaTrash />
                             </Badge>
                         </Heading>
+                        <Divider borderColor="black" />
                         <Text>{event.description}</Text>
                         <Text>{event.date}</Text>
                         <Badge bg="#2314ed" color="white">

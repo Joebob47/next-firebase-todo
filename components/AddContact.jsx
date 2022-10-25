@@ -10,7 +10,11 @@ import {
     Stack,
     Select,
     useToast,
+    InputLeftElement,
+    InputGroup
 } from "@chakra-ui/react";
+
+import { BsFillPersonPlusFill, BsFillTelephoneFill  } from "react-icons/bs";
 //useAuth function, because this page requires authentication
 import useAuth from "../hooks/useAuth";
 //bring in addTodo from our api
@@ -69,17 +73,29 @@ const AddContact = () => {
     return (
         <Box w="40%" margin={"0 auto"} display="block" mt={5}>
             <Stack direction="column">
+                <InputGroup>
+                <InputLeftElement
+                    pointerEvents='none'
+                    children={<BsFillPersonPlusFill/>}
+                />
                 <Input
                     placeholder="Contact Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     />
-                <Textarea
+                </InputGroup>
+                <InputGroup>
+                    <InputLeftElement
+                    pointerEvents='none'
+                    children={<BsFillTelephoneFill  />}
+                    />
+                <Input type="tel"
                     placeholder="Phone Number"
                     value={number}
                     onChange={(e) => setNumber(e.target.value)}
                 />
-                
+                </InputGroup>
+
                 <Button
                 
                     onClick={() => handleContactCreate()}
