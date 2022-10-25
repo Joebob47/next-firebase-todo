@@ -17,6 +17,7 @@ export default function Home() {
             zIndex={0}
             transform = "scale(1.1,1.1)"
             boxSize='300px'
+            alt="Daily Task App Logo"
             />
           <Image
             boxSize='300px'

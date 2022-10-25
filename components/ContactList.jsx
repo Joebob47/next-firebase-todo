@@ -121,11 +121,12 @@ import {
                                 >
                                 <FaTrash />
                             </Badge>
-                        <Heading as="h3" fontSize={"xl"}><BsFillPersonFill style={{display:"inline"}}/> &nbsp; {contact.name}
-                        {contact.name}{" "}
+                        <Heading as="h3" fontSize={"xl"}><BsFillPersonFill style={{display:"inline"}} 
+                        size={16}/> &nbsp;
+                            {contact.name}{" "}
                         </Heading>
                         <Divider borderColor="black" />
-                        <Text><BsFillTelephoneFill style={{display:"inline"}}/> &nbsp; {contact.number}</Text>
+                        <Text><BsFillTelephoneFill style={{display:"inline"}} size={14}/> &nbsp; {contact.number}</Text>
                         <br/>
                         <Badge bg="#2314ed" color="white">
                             <Link href={`/contact/${contact.id}`}> Edit </Link> 

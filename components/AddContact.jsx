@@ -75,9 +75,10 @@ const AddContact = () => {
             <Stack direction="column">
                 <InputGroup>
                 <InputLeftElement
-                    pointerEvents='none'
-                    children={<BsFillPersonPlusFill/>}
-                />
+                pointerEvents='none'>
+                    <BsFillPersonPlusFill/>
+                </InputLeftElement>
+                
                 <Input
                     placeholder="Contact Name"
                     value={name}
@@ -86,9 +87,9 @@ const AddContact = () => {
                 </InputGroup>
                 <InputGroup>
                     <InputLeftElement
-                    pointerEvents='none'
-                    children={<BsFillTelephoneFill  />}
-                    />
+                    pointerEvents='none'>
+                        <BsFillTelephoneFill  />
+                    </InputLeftElement>
                 <Input type="tel"
                     placeholder="Phone Number"
                     value={number}
