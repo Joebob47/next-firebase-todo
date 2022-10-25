@@ -1,6 +1,6 @@
 //going to isolate 
 import { Container } from "@chakra-ui/react";
-import AddEvent from "../components/addEvent.jsx";
+import AddEvent from "../components/AddEvent.jsx";
 import Auth from "../components/Auth";
 
 export default function AddAnEvent() {
